@@ -1,5 +1,9 @@
 version: "3"
 services:
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
   bank:
     build:
       context: .
