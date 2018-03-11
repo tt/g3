@@ -1,5 +1,9 @@
 version: "3"
 services:
+  bank:
+    build:
+      context: .
+      dockerfile: bank/Dockerfile
   eventbus:
     build:
       context: .
