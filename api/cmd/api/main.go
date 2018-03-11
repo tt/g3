@@ -19,9 +19,9 @@ func main() {
 	}
 
 	go func() {
-	defer client.Conn.Close()
+		defer client.Conn.Close()
 
-	err = api.Listen(client)
+		err = api.Listen(client)
 		errs <- err
 	}()
 
