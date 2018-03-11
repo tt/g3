@@ -12,6 +12,10 @@ services:
     build:
       context: .
       dockerfile: bank/Dockerfile
+    environment:
+      - "EVENTBUS_ADDR=eventbus:50051"
+    depends_on:
+      - eventbus
   eventbus:
     build:
       context: .

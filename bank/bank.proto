@@ -3,4 +3,12 @@ syntax = "proto3";
 package bank;
 
 service Bank {
+  rpc OpenAccount (OpenAccountRequest) returns (OpenAccountResponse) {}
+}
+
+message OpenAccountRequest {
+}
+
+message OpenAccountResponse {
+  string id = 1;
 }
