@@ -21,8 +21,7 @@ func main() {
 	go func() {
 		defer client.Conn.Close()
 
-		err = api.Listen(client)
-		errs <- err
+		errs <- api.Listen(client)
 	}()
 
 	h := handler.New(&handler.Config{
