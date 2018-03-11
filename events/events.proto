@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package events;
+
+message AccountOpened {
+  string id = 1;
+}
