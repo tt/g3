@@ -5,7 +5,10 @@ services:
       context: .
       dockerfile: api/Dockerfile
     environment:
+      - "BANK_ADDR=bank:50051"
       - "EVENTBUS_ADDR=eventbus:50051"
+    ports:
+      - 8080:8080
     depends_on:
       - eventbus
   bank:

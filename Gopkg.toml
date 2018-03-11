@@ -3,6 +3,10 @@
   version = "1.0.0"
 
 [[constraint]]
+  name = "github.com/graphql-go/graphql"
+  version = "0.7.0"
+
+[[constraint]]
   name = "google.golang.org/grpc"
   version = "1.10.0"
 
