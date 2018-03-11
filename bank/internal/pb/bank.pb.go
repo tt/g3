@@ -8,6 +8,8 @@ It is generated from these files:
 	bank.proto
 
 It has these top-level messages:
+	OpenAccountRequest
+	OpenAccountResponse
 */
 package pb
 
@@ -31,6 +33,35 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
+type OpenAccountRequest struct {
+}
+
+func (m *OpenAccountRequest) Reset()                    { *m = OpenAccountRequest{} }
+func (m *OpenAccountRequest) String() string            { return proto.CompactTextString(m) }
+func (*OpenAccountRequest) ProtoMessage()               {}
+func (*OpenAccountRequest) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{0} }
+
+type OpenAccountResponse struct {
+	Id string `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+}
+
+func (m *OpenAccountResponse) Reset()                    { *m = OpenAccountResponse{} }
+func (m *OpenAccountResponse) String() string            { return proto.CompactTextString(m) }
+func (*OpenAccountResponse) ProtoMessage()               {}
+func (*OpenAccountResponse) Descriptor() ([]byte, []int) { return fileDescriptor0, []int{1} }
+
+func (m *OpenAccountResponse) GetId() string {
+	if m != nil {
+		return m.Id
+	}
+	return ""
+}
+
+func init() {
+	proto.RegisterType((*OpenAccountRequest)(nil), "bank.OpenAccountRequest")
+	proto.RegisterType((*OpenAccountResponse)(nil), "bank.OpenAccountResponse")
+}
+
 // Reference imports to suppress errors if they are not otherwise used.
 var _ context.Context
 var _ grpc.ClientConn
@@ -42,6 +73,7 @@ const _ = grpc.SupportPackageIsVersion4
 // Client API for Bank service
 
 type BankClient interface {
+	OpenAccount(ctx context.Context, in *OpenAccountRequest, opts ...grpc.CallOption) (*OpenAccountResponse, error)
 }
 
 type bankClient struct {
@@ -52,29 +84,66 @@ func NewBankClient(cc *grpc.ClientConn) BankClient {
 	return &bankClient{cc}
 }
 
+func (c *bankClient) OpenAccount(ctx context.Context, in *OpenAccountRequest, opts ...grpc.CallOption) (*OpenAccountResponse, error) {
+	out := new(OpenAccountResponse)
+	err := grpc.Invoke(ctx, "/bank.Bank/OpenAccount", in, out, c.cc, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Bank service
 
 type BankServer interface {
+	OpenAccount(context.Context, *OpenAccountRequest) (*OpenAccountResponse, error)
 }
 
 func RegisterBankServer(s *grpc.Server, srv BankServer) {
 	s.RegisterService(&_Bank_serviceDesc, srv)
 }
 
+func _Bank_OpenAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OpenAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BankServer).OpenAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bank.Bank/OpenAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BankServer).OpenAccount(ctx, req.(*OpenAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Bank_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "bank.Bank",
 	HandlerType: (*BankServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "bank.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "OpenAccount",
+			Handler:    _Bank_OpenAccount_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "bank.proto",
 }
 
 func init() { proto.RegisterFile("bank.proto", fileDescriptor0) }
 
 var fileDescriptor0 = []byte{
-	// 53 bytes of a gzipped FileDescriptorProto
+	// 125 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0x4a, 0xcc, 0xcb,
-	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0x8d, 0xd8, 0xb8, 0x58, 0x9c, 0x12,
-	0xf3, 0xb2, 0x93, 0xd8, 0xc0, 0x82, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x4c, 0x85, 0xc9,
-	0x42, 0x22, 0x00, 0x00, 0x00,
+	0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x01, 0xb1, 0x95, 0x44, 0xb8, 0x84, 0xfc, 0x0b,
+	0x52, 0xf3, 0x1c, 0x93, 0x93, 0xf3, 0x4b, 0xf3, 0x4a, 0x82, 0x52, 0x0b, 0x4b, 0x53, 0x8b, 0x4b,
+	0x94, 0x54, 0xb9, 0x84, 0x51, 0x44, 0x8b, 0x0b, 0xf2, 0xf3, 0x8a, 0x53, 0x85, 0xf8, 0xb8, 0x98,
+	0x32, 0x53, 0x24, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0x98, 0x32, 0x53, 0x8c, 0x7c, 0xb8, 0x58,
+	0x9c, 0x12, 0xf3, 0xb2, 0x85, 0x5c, 0xb8, 0xb8, 0x91, 0x94, 0x0b, 0x49, 0xe8, 0x81, 0xad, 0xc1,
+	0x34, 0x57, 0x4a, 0x12, 0x8b, 0x0c, 0xc4, 0x6c, 0x25, 0x86, 0x24, 0x36, 0xb0, 0xbb, 0x8c, 0x01,
+	0x01, 0x00, 0x00, 0xff, 0xff, 0x28, 0x01, 0x4e, 0xdf, 0xa5, 0x00, 0x00, 0x00,
 }

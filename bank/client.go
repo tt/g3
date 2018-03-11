@@ -1,6 +1,9 @@
 package bank
 
 import (
+	"context"
+
+	"github.com/tt/g3/bank/internal/pb"
 	"google.golang.org/grpc"
 )
 
@@ -15,4 +18,17 @@ func Dial(address string) (*Client, error) {
 	}
 
 	return &Client{Conn: conn}, nil
+}
+
+func (c *Client) OpenAccount() (string, error) {
+	client := pb.NewBankClient(c.Conn)
+
+	request := &pb.OpenAccountRequest{}
+
+	response, err := client.OpenAccount(context.Background(), request)
+	if err != nil {
+		return "", err
+	}
+
+	return response.Id, nil
 }
