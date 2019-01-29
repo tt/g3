@@ -3,5 +3,8 @@
 build:
 	go build -v ./...
 
-generate:
+protoc-gen-go:
+	go install ./vendor/github.com/golang/protobuf/protoc-gen-go
+
+generate: protoc-gen-go
 	go generate -v ./...

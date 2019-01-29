@@ -2,10 +2,15 @@
 
 
 [[projects]]
-  digest = "1:d6d1ec91bd9bb6dc9da097b4b1bf4d482d9aad1b675f70ac4ddc22bc046ec54e"
+  digest = "1:458e1dfc9d35ee0089bf20a430f6277dd25882b3f9b2a601663f7ee7d0f0924f"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
+    "protoc-gen-go",
+    "protoc-gen-go/descriptor",
+    "protoc-gen-go/generator",
+    "protoc-gen-go/grpc",
+    "protoc-gen-go/plugin",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
@@ -136,12 +141,14 @@
   analyzer-version = 1
   input-imports = [
     "github.com/golang/protobuf/proto",
+    "github.com/golang/protobuf/protoc-gen-go",
     "github.com/golang/protobuf/ptypes",
     "github.com/golang/protobuf/ptypes/any",
     "github.com/golang/protobuf/ptypes/empty",
     "github.com/google/uuid",
     "github.com/graphql-go/graphql",
     "github.com/graphql-go/handler",
+    "golang.org/x/net/context",
     "google.golang.org/grpc",
   ]
   solver-name = "gps-cdcl"
